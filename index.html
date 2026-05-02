@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechFácil — Suporte técnico com IA para toda a família</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #185FA5;
+    --blue-dark: #0C447C;
+    --blue-light: #E6F1FB;
+    --blue-mid: #378ADD;
+    --green: #3B6D11;
+    --green-light: #EAF3DE;
+    --text: #1A1916;
+    --text-2: #4A4845;
+    --text-3: #888780;
+    --bg: #F7F9FC;
+    --white: #FFFFFF;
+    --border: #E3E8F0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(247,249,252,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-icon { width: 36px; height: 36px; background: var(--blue); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .nav-logo-icon svg { width: 20px; height: 20px; }
+  .nav-logo-text { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); }
+  .nav-cta { background: var(--blue); color: white; border: none; border-radius: 10px; padding: 10px 20px; font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--blue-dark); }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 24px 80px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(24,95,165,0.08) 0%, transparent 70%); pointer-events: none; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); border: 1px solid rgba(24,95,165,0.2); border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 500; color: var(--blue); margin-bottom: 28px; animation: fadeUp 0.6s ease both; }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+  .hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(36px, 6vw, 64px); font-weight: 800; line-height: 1.1; color: var(--text); max-width: 720px; margin-bottom: 20px; animation: fadeUp 0.6s 0.1s ease both; }
+  .hero h1 span { color: var(--blue); }
+  .hero-sub { font-size: clamp(16px, 2vw, 20px); color: var(--text-2); max-width: 540px; line-height: 1.6; margin-bottom: 40px; font-weight: 300; animation: fadeUp 0.6s 0.2s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .hero-form { display: flex; gap: 12px; max-width: 480px; width: 100%; margin-bottom: 20px; animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-form input { flex: 1; border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 18px; font-size: 15px; font-family: 'DM Sans', sans-serif; background: white; color: var(--text); outline: none; transition: border 0.2s; }
+  .hero-form input:focus { border-color: var(--blue-mid); }
+  .hero-form input::placeholder { color: var(--text-3); }
+  .hero-form button { background: var(--blue); color: white; border: none; border-radius: 12px; padding: 14px 24px; font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+  .hero-form button:hover { background: var(--blue-dark); transform: translateY(-1px); }
+  .hero-note { font-size: 13px; color: var(--text-3); animation: fadeUp 0.6s 0.4s ease both; }
+  .hero-note strong { color: var(--green); }
+
+  .pain { padding: 80px 24px; max-width: 900px; margin: 0 auto; text-align: center; }
+  .section-label { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+  .pain h2 { font-family: 'Sora', sans-serif; font-size: clamp(26px, 4vw, 40px); font-weight: 700; line-height: 1.2; color: var(--text); margin-bottom: 16px; }
+  .pain-sub { font-size: 18px; color: var(--text-2); max-width: 600px; margin: 0 auto 48px; line-height: 1.6; font-weight: 300; }
+  .pain-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .pain-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: left; transition: transform 0.2s, box-shadow 0.2s; }
+  .pain-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(24,95,165,0.1); }
+  .pain-emoji { font-size: 32px; margin-bottom: 14px; display: block; }
+  .pain-card h3 { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .pain-card p { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+
+  .how { background: var(--blue); padding: 80px 24px; text-align: center; }
+  .how h2 { font-family: 'Sora', sans-serif; font-size: clamp(26px, 4vw, 40px); font-weight: 700; color: white; margin-bottom: 12px; }
+  .how-sub { font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 56px; font-weight: 300; }
+  .how-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; max-width: 900px; margin: 0 auto; }
+  .how-step { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .step-num { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; color: white; }
+  .how-step h3 { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; color: white; }
+  .how-step p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+  .features { padding: 80px 24px; max-width: 900px; margin: 0 auto; }
+  .features-header { text-align: center; margin-bottom: 48px; }
+  .features-header h2 { font-family: 'Sora', sans-serif; font-size: clamp(26px, 4vw, 40px); font-weight: 700; color: var(--text); margin-bottom: 12px; }
+  .features-header p { font-size: 18px; color: var(--text-2); font-weight: 300; }
+  .feat-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .feat-item { display: flex; gap: 14px; align-items: flex-start; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+  .feat-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--blue-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .feat-icon svg { width: 20px; height: 20px; }
+  .feat-item h3 { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .feat-item p { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+  .plans { background: white; padding: 80px 24px; text-align: center; }
+  .plans h2 { font-family: 'Sora', sans-serif; font-size: clamp(26px, 4vw, 40px); font-weight: 700; color: var(--text); margin-bottom: 12px; }
+  .plans-sub { font-size: 18px; color: var(--text-2); margin-bottom: 48px; font-weight: 300; }
+  .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 860px; margin: 0 auto 40px; }
+  .plan-card { border: 1.5px solid var(--border); border-radius: 20px; padding: 28px 24px; text-align: left; background: var(--bg); transition: all 0.2s; }
+  .plan-card.featured { background: var(--blue); border-color: var(--blue); }
+  .plan-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(24,95,165,0.12); }
+  .plan-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; margin-bottom: 16px; background: var(--blue-light); color: var(--blue); }
+  .plan-card.featured .plan-badge { background: rgba(255,255,255,0.2); color: white; }
+  .plan-name { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .plan-card.featured .plan-name { color: white; }
+  .plan-price { font-family: 'Sora', sans-serif; font-size: 36px; font-weight: 800; color: var(--blue); margin: 12px 0 4px; }
+  .plan-card.featured .plan-price { color: white; }
+  .plan-period { font-size: 13px; color: var(--text-3); margin-bottom: 20px; }
+  .plan-card.featured .plan-period { color: rgba(255,255,255,0.6); }
+  .plan-divider { border: none; border-top: 1px solid var(--border); margin-bottom: 16px; }
+  .plan-card.featured .plan-divider { border-color: rgba(255,255,255,0.2); }
+  .plan-feats { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .plan-feats li { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-2); }
+  .plan-card.featured .plan-feats li { color: rgba(255,255,255,0.85); }
+  .plan-feats li::before { content: '✓'; width: 18px; height: 18px; background: var(--green-light); color: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .plan-card.featured .plan-feats li::before { background: rgba(255,255,255,0.2); color: white; }
+
+  .cta-final { padding: 80px 24px; text-align: center; max-width: 640px; margin: 0 auto; }
+  .cta-final h2 { font-family: 'Sora', sans-serif; font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: var(--text); margin-bottom: 16px; line-height: 1.2; }
+  .cta-final p { font-size: 18px; color: var(--text-2); margin-bottom: 36px; font-weight: 300; line-height: 1.6; }
+  .cta-form { display: flex; flex-direction: column; gap: 12px; max-width: 420px; margin: 0 auto 16px; }
+  .cta-form input { border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 18px; font-size: 15px; font-family: 'DM Sans', sans-serif; background: white; color: var(--text); outline: none; transition: border 0.2s; }
+  .cta-form input:focus { border-color: var(--blue-mid); }
+  .cta-form button { background: var(--blue); color: white; border: none; border-radius: 12px; padding: 16px; font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .cta-form button:hover { background: var(--blue-dark); transform: translateY(-1px); }
+  .cta-note { font-size: 13px; color: var(--text-3); }
+  .success-msg { display: none; background: var(--green-light); border: 1px solid rgba(59,109,17,0.2); border-radius: 12px; padding: 16px 20px; color: var(--green); font-size: 15px; font-weight: 500; text-align: center; margin-top: 12px; }
+
+  footer { border-top: 1px solid var(--border); padding: 24px; text-align: center; font-size: 13px; color: var(--text-3); }
+
+  @media (max-width: 600px) {
+    .hero-form { flex-direction: column; }
+    .hero-form button { width: 100%; }
+    nav { padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+        <rect x="2" y="3" width="20" height="14" rx="2"/>
+        <path d="M8 21h8M12 17v4"/>
+        <circle cx="12" cy="10" r="1.5" fill="white" stroke="none"/>
+      </svg>
+    </div>
+    <span class="nav-logo-text">TechFácil</span>
+  </a>
+  <a href="#lista" class="nav-cta">Quero testar grátis</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Suporte técnico com Inteligência Artificial
+  </div>
+  <h1>Chega de ser o <span>suporte técnico</span> da família</h1>
+  <p class="hero-sub">O TechFácil resolve os problemas de computador, celular e internet dos seus pais e avós — com IA, 24h por dia, sem precisar de você.</p>
+  <div class="hero-form">
+    <input type="email" id="email-hero" placeholder="Seu melhor e-mail" />
+    <button onclick="cadastrar('email-hero', 'success-hero')">Quero testar grátis →</button>
+  </div>
+  <p class="hero-note"><strong>30 dias grátis</strong> · Sem cartão de crédito · Cancele quando quiser</p>
+  <div class="success-msg" id="success-hero">🎉 Ótimo! Entraremos em contato em breve com seu acesso.</div>
+</section>
+
+<section class="pain">
+  <p class="section-label">Você se identifica?</p>
+  <h2>Toda semana a mesma história…</h2>
+  <p class="pain-sub">Milhões de brasileiros vivem isso todo dia. Agora tem solução.</p>
+  <div class="pain-cards">
+    <div class="pain-card">
+      <span class="pain-emoji">📱</span>
+      <h3>"Filho, meu celular travou de novo"</h3>
+      <p>Ligação às 20h de uma sexta-feira para resolver algo que poderia ser resolvido sem você.</p>
+    </div>
+    <div class="pain-card">
+      <span class="pain-emoji">💻</span>
+      <h3>"O computador está muito lento"</h3>
+      <p>Horas de final de semana perdidas resolvendo problemas simples que qualquer IA pode resolver em minutos.</p>
+    </div>
+    <div class="pain-card">
+      <span class="pain-emoji">⚠️</span>
+      <h3>"Recebi um e-mail estranho…"</h3>
+      <p>Golpes digitais crescem todo ano. Seus pais precisam de alguém que identifique ameaças na hora certa.</p>
+    </div>
+    <div class="pain-card">
+      <span class="pain-emoji">📶</span>
+      <h3>"A internet parou de funcionar"</h3>
+      <p>Um problema que tem solução em 3 passos simples — mas sem orientação vira um drama de horas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <p class="section-label" style="color:rgba(255,255,255,0.6)">Como funciona</p>
+  <h2>Simples como mandar uma mensagem</h2>
+  <p class="how-sub">Sem complicação. Funciona no celular que eles já têm.</p>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="step-num">1</div>
+      <h3>Descreve o problema</h3>
+      <p>Em palavras simples, como contaria para um amigo. Sem termos técnicos.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">2</div>
+      <h3>A IA entende e orienta</h3>
+      <p>Recebe instruções passo a passo, claras e simples. Pode enviar um print da tela também.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">3</div>
+      <h3>Problema resolvido</h3>
+      <p>Sem precisar ligar para ninguém. Com mais independência e confiança.</p>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="features-header">
+    <p class="section-label">Funcionalidades</p>
+    <h2>Tudo que eles precisam</h2>
+    <p>Desenvolvido pensando em quem não tem familiaridade com tecnologia.</p>
+  </div>
+  <div class="feat-list">
+    <div class="feat-item">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <div><h3>Chat em linguagem simples</h3><p>A IA fala como uma pessoa, não como um manual técnico. Passo a passo, sem jargões.</p></div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+      <div><h3>Envio de print de tela</h3><p>Tira uma foto da tela e a IA vê exatamente o que está acontecendo para ajudar com precisão.</p></div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div><h3>Disponível 24h por dia</h3><p>O problema não escolhe hora. O TechFácil está sempre disponível, inclusive nos finais de semana.</p></div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><h3>Alerta de golpes digitais</h3><p>Identifica e-mails, mensagens e sites suspeitos antes que causem prejuízo.</p></div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div><h3>Plano Família</h3><p>Um plano para até 4 pessoas. Cada um com seu perfil e histórico de conversas independente.</p></div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <div><h3>Seguro e privado</h3><p>Seus dados e conversas são protegidos. Nenhuma informação é compartilhada com terceiros.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="plans" id="planos">
+  <p class="section-label">Planos</p>
+  <h2>Simples e sem surpresas</h2>
+  <p class="plans-sub">Cancele quando quiser. Sem fidelidade.</p>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <span class="plan-badge">Para começar</span>
+      <div class="plan-name">Básico</div>
+      <div class="plan-price">R$ 29</div>
+      <div class="plan-period">por mês · 1 pessoa</div>
+      <hr class="plan-divider">
+      <ul class="plan-feats">
+        <li>40 conversas por mês</li>
+        <li>Envio de prints de tela</li>
+        <li>Histórico de 7 dias</li>
+        <li>Suporte 7 dias por semana</li>
+      </ul>
+    </div>
+    <div class="plan-card featured">
+      <span class="plan-badge">Mais popular</span>
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">R$ 49</div>
+      <div class="plan-period">por mês · 1 pessoa</div>
+      <hr class="plan-divider">
+      <ul class="plan-feats">
+        <li>Conversas ilimitadas</li>
+        <li>IA mais inteligente</li>
+        <li>Histórico permanente</li>
+        <li>Escalada para técnico humano</li>
+      </ul>
+    </div>
+    <div class="plan-card">
+      <span class="plan-badge">Melhor custo</span>
+      <div class="plan-name">Família</div>
+      <div class="plan-price">R$ 79</div>
+      <div class="plan-period">por mês · até 4 pessoas</div>
+      <hr class="plan-divider">
+      <ul class="plan-feats">
+        <li>Tudo do Premium</li>
+        <li>Até 4 perfis independentes</li>
+        <li>Painel do responsável</li>
+        <li>Histórico compartilhado</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="lista">
+  <h2>Experimente grátis por 30 dias</h2>
+  <p>Sem cartão de crédito. Sem compromisso. Cancele quando quiser. Veja na prática como o TechFácil transforma a relação da sua família com a tecnologia.</p>
+  <div class="cta-form">
+    <input type="text" id="nome-cta" placeholder="Seu nome" />
+    <input type="email" id="email-cta" placeholder="Seu melhor e-mail" />
+    <button onclick="cadastrar('email-cta', 'success-cta')">Garantir meus 30 dias grátis →</button>
+  </div>
+  <p class="cta-note">Você receberá um e-mail com o link para baixar o app.</p>
+  <div class="success-msg" id="success-cta">🎉 Perfeito! Em breve você receberá o link para baixar o app e começar a usar.</div>
+</section>
+
+<footer>
+  <p>© 2026 TechFácil · Suporte técnico com inteligência artificial · Todos os direitos reservados</p>
+</footer>
+
+<script>
+function cadastrar(inputId, successId) {
+  const email = document.getElementById(inputId).value.trim()
+  if (!email || !email.includes('@')) {
+    alert('Por favor, informe um e-mail válido.')
+    return
+  }
+  document.getElementById(successId).style.display = 'block'
+  document.getElementById(inputId).value = ''
+}
+</script>
+</body>
+</html>
