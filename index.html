@@ -150,7 +150,7 @@
   <p class="hero-sub">O TechFácil resolve os problemas de computador, celular e internet dos seus pais e avós — com IA, 24h por dia, sem precisar de você.</p>
   <div class="hero-form">
     <input type="email" id="email-hero" placeholder="Seu melhor e-mail" />
-    <button onclick="cadastrar('email-hero', 'success-hero')">Quero testar grátis →</button>
+    <button onclick="cadastrar(null, 'email-hero', 'success-hero')">Quero testar grátis →</button>
   </div>
   <p class="hero-note"><strong>30 dias grátis</strong> · Sem cartão de crédito · Cancele quando quiser</p>
   <div class="success-msg" id="success-hero">🎉 Ótimo! Entraremos em contato em breve com seu acesso.</div>
@@ -294,7 +294,7 @@
   <div class="cta-form">
     <input type="text" id="nome-cta" placeholder="Seu nome" />
     <input type="email" id="email-cta" placeholder="Seu melhor e-mail" />
-    <button onclick="cadastrar('email-cta', 'success-cta')">Garantir meus 30 dias grátis →</button>
+    <button onclick="cadastrar('nome-cta', 'email-cta', 'success-cta')">Garantir meus 30 dias grátis →</button>
   </div>
   <p class="cta-note">Você receberá um e-mail com o link para baixar o app.</p>
   <div class="success-msg" id="success-cta">🎉 Perfeito! Em breve você receberá o link para baixar o app e começar a usar.</div>
@@ -305,14 +305,33 @@
 </footer>
 
 <script>
-function cadastrar(inputId, successId) {
-  const email = document.getElementById(inputId).value.trim()
+async function cadastrar(nomeId, emailId, successId) {
+  const nome = document.getElementById(nomeId)?.value?.trim() ?? ''
+  const email = document.getElementById(emailId).value.trim()
+
   if (!email || !email.includes('@')) {
     alert('Por favor, informe um e-mail válido.')
     return
   }
+
+  const btn = event.target
+  btn.textContent = 'Enviando...'
+  btn.disabled = true
+
+  try {
+    await fetch('https://script.google.com/macros/s/AKfycbyD3w7Fak244YVrEwAueCnLstgsFJ29NCHG9BVoYWDrRLvnPRutACrk6z4OB95YBkWZ/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, email })
+    })
+  } catch (e) {}
+
   document.getElementById(successId).style.display = 'block'
-  document.getElementById(inputId).value = ''
+  document.getElementById(emailId).value = ''
+  if (document.getElementById(nomeId)) document.getElementById(nomeId).value = ''
+  btn.textContent = 'Garantir meus 30 dias grátis →'
+  btn.disabled = false
 }
 </script>
 </body>
